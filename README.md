@@ -1,11 +1,11 @@
 # Computer Graphics 203.3710, Winter 2018/2019
 ## Students Team data
 
-Name: 'Your real name'  
-Student Number: 'Your student number'
+Name: 'Ibrahim qashqoush'  
+Student Number: '203871835'
 
-Name: 'Your real name'  
-Student Number: 'Your student number'
+Name: 'Fadi Khatib'  
+Student Number: '308052992'
 
 ### Lecturer
 *Roi Poranne*
