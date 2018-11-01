@@ -1,4 +1,8 @@
 #include "Face.h"
+#include <cmath>
+#include <cstdlib>
+#include <iostream>     // std::cout, std::noskipws
+#include <sstream>      // std::istringstream, std::ws
 
 Face::Face(std::istream& issLine)
 {

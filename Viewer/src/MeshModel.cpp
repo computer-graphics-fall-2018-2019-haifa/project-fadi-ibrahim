@@ -7,6 +7,9 @@
 #include <sstream>
 
 MeshModel::MeshModel(const std::vector<Face>& faces, const std::vector<glm::vec3>& vertices, const std::vector<glm::vec3>& normals, const std::string& modelName) :
+    vertices(vertices),
+    faces(faces),
+    normals(normals),
 	modelName(modelName),
 	worldTransform(glm::mat4x4(1))
 {

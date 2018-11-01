@@ -3,7 +3,8 @@
 # for the general use of cmake:
 # https://cognitivewaves.wordpress.com/cmake-and-visual-studio/
 cmake_minimum_required (VERSION 3.11)
-project (MeshViewer C CXX)
+set (CMAKE_CXX_STANDARD 11)
+project (MeshViewer C CXX  )
 # Turn on the ability to create folders to organize projects (.vcproj)
 # It creates "CMakePredefinedTargets" folder by default and adds CMake
 # defined projects like INSTALL.vcproj and ZERO_CHECK.vcproj
@@ -44,6 +45,20 @@ endif()
 
 # will find opengl on the system and create variables for the location of the static libreries etc...
 find_package(OpenGL REQUIRED)
+
+# Use the package PkgConfig to detect GTK+ headers/library files
+FIND_PACKAGE(PkgConfig REQUIRED)
+PKG_CHECK_MODULES(GTK3 REQUIRED gtk+-3.0)
+
+# Setup CMake to use GTK+, tell the compiler where to look for headers
+# and to the linker where to look for libraries
+LINK_DIRECTORIES(${GTK3_LIBRARY_DIRS})
+
+# Add other flags to the compiler
+ADD_DEFINITIONS(${GTK3_CFLAGS_OTHER})
+
+
+
 message(STATUS ">>> OpenGL found: ${OPENGL_FOUND}")
 message(STATUS ">>> OPENGL_LIBRARIES: ${OPENGL_LIBRARIES}")
 # Collect sources into the variable SOURCE_FILES, HEADER_FILES without
@@ -76,6 +91,7 @@ include_directories ("Viewer/include"
 					 ${imgui_INCLUDE_DIRS}
 					 ${nfd_INCLUDE_DIRS}
 					 ${ImGuizmo_INCLUDE_DIRS}
+                     ${GTK3_INCLUDE_DIRS}
 					 )
 # Set Properties->General->Configuration Type to Application(.exe)
 # Creates app.exe with the listed sources (main.cpp)
@@ -86,7 +102,7 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES} ${SHADER_FILES})
 set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER ${PROJECT_NAME})
 
 # link subprojects	 
-target_link_libraries(${PROJECT_NAME} glad glfw imgui nativefiledialog ImGuizmo ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} glad glfw imgui   nativefiledialog ImGuizmo ${GTK3_LIBRARIES} ${OPENGL_LIBRARIES})
 # Turn on the ability to create folders to organize projects (.vcproj)
 # It creates "CMakePredefinedTargets" folder by default and adds CMake
 # defined projects like INSTALL.vcproj and ZERO_CHECK.vcproj
