@@ -35,8 +35,24 @@ void Renderer::putPixel(int i, int j, const glm::vec3& color)
 }
 void Renderer::DrawLine(const glm::vec2 &v1,const glm::vec2 &v2,const glm::vec3 &Color)
 {
-float x=v1.x;	
-printf("%f\n",x );
+// asume that x2 greater than x1 and y2 greater than y1 and delta x greater than delta y
+float delta_x=v2.x-v1.x;
+float delta_y=v2.y-v1.y;
+float e=2*delta_y-delta_x;
+int x=v1.x;
+int y=v2.y;
+while(x<(x+delta_x)){
+while(e>0)
+{
+	y=y+1;
+	e=e-2*delta_x;
+}
+x=x+1;
+e=e+2*delta_y;
+
+putPixel(x, y, Color);
+}
+printf("end\n");
 }
 void Renderer::createBuffers(int viewportWidth, int viewportHeight)
 {
@@ -84,9 +100,11 @@ void Renderer::Render(const Scene& scene)
 	//#############################################
 
 	// Draw a chess board in the middle of the screen
-	for (int i = 100; i < viewportWidth - 100; i++)
+	printf("hi\n");
+
+	for (int i = 10; i < viewportWidth - 10; i++)
 	{
-		for (int j = 100; j < viewportHeight - 100; j++)
+		for (int j = 10; j < viewportHeight - 10; j++)
 		{
 			int mod_i = i / 50;
 			int mod_j = j / 50;
@@ -102,6 +120,7 @@ void Renderer::Render(const Scene& scene)
 			}
 		}
 	}
+	DrawLine(glm::vec2(0.1, 0.1),glm::vec2(33, 4),glm::vec3(1, 1, 1));
  }
 
 //##############################
