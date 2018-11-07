@@ -36,11 +36,21 @@ void Renderer::putPixel(int i, int j, const glm::vec3& color)
 void Renderer::DrawLine(const glm::vec2 &v1,const glm::vec2 &v2,const glm::vec3 &Color)
 {
 // asume that x2 greater than x1 and y2 greater than y1 and delta x greater than delta y
-float delta_x=v2.x-v1.x;
-float delta_y=v2.y-v1.y;
-float e=2*delta_y-delta_x;
-int x=v1.x;
-int y=v2.y;
+bool xf,yf,typeA,typeBx;
+float delta_x,delta_y,e;
+int x,y,x1,y1,x2,y2;
+ v2.x>v1.x?xf=true:xf=false;
+v2.y>v1.y?yf=true:yf=false;
+((xf&&yf)||((!xf)&&(!yf)))?typeA=true:typeA=false;
+
+if(typeA){
+v2.x>v1.x?(x1=v1.x,x2=v2.x,y1=v1.y,y2=v2.y):(x1=v2.x,x2=v1.x,y1=v2.y,y2=v1.y);
+  delta_x=x2-x1;
+  delta_y=y2-y1;
+  e=2*delta_y-delta_x;
+
+  x=x1;
+  y=y2;
 while(x<(x+delta_x)){
 while(e>0)
 {
@@ -52,8 +62,15 @@ e=e+2*delta_y;
 
 putPixel(x, y, Color);
 }
-printf("end\n");
 }
+else
+{
+v1.x>v2.x?typeBx=true:typeBx=false;
+//typeBx?
+
+}
+  
+ }
 void Renderer::createBuffers(int viewportWidth, int viewportHeight)
 {
 	if (colorBuffer)
@@ -120,7 +137,7 @@ void Renderer::Render(const Scene& scene)
 			}
 		}
 	}
-	DrawLine(glm::vec2(0.1, 0.1),glm::vec2(33, 4),glm::vec3(1, 1, 1));
+	DrawLine(glm::vec2(3, 3),glm::vec2(2, 2),glm::vec3(1, 1, 1));
  }
 
 //##############################
