@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+ 
 #include <vector>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -27,6 +28,7 @@ private:
 
 	void createOpenGLBuffer();
 	void initOpenGLRendering();
+    void DrawLine(const glm::vec2 &v1,const glm::vec2 &v2,const glm::vec3 &Color);
 
 public:
 	Renderer(int viewportWidth, int viewportHeight, int viewportX = 0, int viewportY = 0);

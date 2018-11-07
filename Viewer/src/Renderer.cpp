@@ -33,7 +33,11 @@ void Renderer::putPixel(int i, int j, const glm::vec3& color)
 	colorBuffer[INDEX(viewportWidth, i, j, 1)] = color.y;
 	colorBuffer[INDEX(viewportWidth, i, j, 2)] = color.z;
 }
-
+void Renderer::DrawLine(const glm::vec2 &v1,const glm::vec2 &v2,const glm::vec3 &Color)
+{
+float x=v1.x;	
+printf("%f\n",x );
+}
 void Renderer::createBuffers(int viewportWidth, int viewportHeight)
 {
 	if (colorBuffer)
@@ -98,7 +102,7 @@ void Renderer::Render(const Scene& scene)
 			}
 		}
 	}
-}
+ }
 
 //##############################
 //##OpenGL stuff. Don't touch.##
